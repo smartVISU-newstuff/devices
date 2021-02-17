@@ -1,0 +1,156 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012 - 2015
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+	<h1><img class="icon" src="{{ icon0 }}scene_power_inverter.svg" />E3DC</h1>
+
+	<div class="block" style="width:100%">
+		<div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>E3DC Plots</h3>
+				{{ plot.period('', ['E3DC.Leistung.PV.Plot', 'E3DC.Leistung.Batterie.Plot', 'E3DC.Leistung.Netz.Plot', 'E3DC.Leistung.Haus.Plot', 'E3DC.Status.Ladezustand.Plot'], ['max', 'max', 'max', 'max', 'max'], '24h', '', ['', 0], ['', 101], 100, ['PV', 'Akku', 'Netz', 'Haus', 'SoC'], ['#f79a1f', '#0f0', '#f00', '#19b1e8', '#fff'], ['areaspline', 'areaspline', 'areaspline', 'spline', 'spline'], ['', 'Leistung in W', 'SoC in %'], '1h', [1, 1, 1, 1, 2], [0, 1], '', '', ['w', '%'], { legend: { verticalAlign: 'bottom', y: 23 } }) }}
+                <br />
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>E3DC Leistungswerte</h3>
+				<table width=100%>
+					<tr>
+						<td align=left>		
+							{{ basic.icon('control_building_empty.svg') }}
+                            Leistung Haus:
+                            {{ icon.meter('', '', 'E3DC.Leistung.Haus', 0, 12000) }}
+							{{ basic.print('', 'E3DC.Leistung.Haus', 'w') }}
+							<br />
+                            {{ basic.icon('measure_photovoltaic_inst.svg') }}
+							Leistung PV:
+                            {{ icon.meter('', '', 'E3DC.Leistung.PV', 0, 12000) }}
+							{{ basic.print('', 'E3DC.Leistung.PV', 'w') }}
+							<br />
+                            {{ basic.icon('scene_power_grid.svg') }}
+                            Leistung Netz:
+                            {{ basic.symbol('', 'E3DC.Leistung.Netz.Icon', '', icon.meter('', '', 'E3DC.Leistung.Netz.Icon', 0, 100), [49], '>', ['#f00', '#0f0']) }}
+                            {{ basic.print('', 'E3DC.Leistung.Netz', 'w', '', 160, ['#0f0', '#f00']) }}
+							<br />
+                            {{ basic.symbol('', 'E3DC.Status.Ladezustand', '', icon.battery2('', '', 'E3DC.Status.Ladezustand', 0, 100), [20, 40, 70], '>', ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+                            Leistung Batterie:
+                            {{ basic.symbol('', 'E3DC.Leistung.Batterie.Icon', '', icon.meter('', '', 'E3DC.Leistung.Batterie.Icon', 0, 100), [17, 33, 50], '>', ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+                            {{ basic.print('', 'E3DC.Leistung.Batterie', 'w', '', [-2000, -1000, -1], ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+							<br />							
+							{{ basic.stateswitch('', 'E3DC.Leistung.Batterie', 'icon', '', 'measure_battery_75.svg', '', 'blank') }}
+							SoC Batterie:
+                            {{ basic.symbol('', 'E3DC.Status.Ladezustand', '', icon.meter('', '', 'E3DC.Status.Ladezustand', 0, 100), [20, 40, 70], '>', ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+							{{ basic.print('', 'E3DC.Status.Ladezustand', '%', '', [20, 40, 70], ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+							<br />
+							{{ basic.stateswitch('', 'E3DC.Status.Autarkie', 'icon', '', 'measure_battery_75.svg', '', 'blank') }}
+                            Autarkie:
+                            {{ basic.symbol('', 'E3DC.Status.Autarkie', '', icon.meter('', '', 'E3DC.Status.Autarkie', 0, 100), [10, 90], '>', ['#f00', '#ff0', '#0f0']) }}
+							{{ basic.print('', 'E3DC.Status.Autarkie', '%', '', [10, 90], ['#f00', '#ff0', '#0f0']) }}
+							<br />
+							{{ basic.stateswitch('', 'E3DC.Status.Eigenverbrauch', 'icon', '', 'measure_battery_75.svg', '', 'blank') }}
+							Eigenverbrauch:
+                            {{ basic.symbol('', 'E3DC.Status.Eigenverbrauch', '', icon.meter('', '', 'E3DC.Status.Eigenverbrauch', 0, 100), [10, 90], '>', ['#f00', '#ff0', '#0f0']) }}
+							{{ basic.print('', 'E3DC.Status.Eigenverbrauch', '%', '', [10, 90], ['#f00', '#ff0', '#0f0']) }}
+						</td>
+					</tr>
+				</table>		
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>E3DC Status</h3>
+                <table align=center>
+					<tr>
+                        <td align=center valign=top height=110px>
+							{{ basic.icon('measure_photovoltaic_inst.svg') }}
+						</td>
+                        <td align=center valign=top width=70px>
+                            {{ basic.symbol('', 'E3DC.Leistung.PV', '', ['control_minus.svg', 'control_arrow_rightward.svg'], 10, '>') }}
+                        <br />
+                            {{ basic.print('', 'E3DC.Leistung.PV', 'w') }}
+						</td>
+						<td rowspan="3" align=middle width=170px>
+                            <img style="height: 302px; vertical-align: middle;" src="dropins/icons/E3DC_S10E.png" />
+                        </td>
+                        <td align=center valign=top width=70px>
+                            {{ basic.symbol('', 'E3DC.Leistung.Netz', '', ['control_arrow_rightward.svg', 'control_minus.svg', 'control_arrow_leftward.svg'], [-10, 10], '>') }}
+						<br />
+							{{ basic.print('', 'E3DC.Leistung.Netz', 'w', '', 160, ['#0f0', '#f00']) }}
+						</td>						
+                        <td align=center valign=top>
+                            {{ basic.symbol('', 'E3DC.Status.Notstrom', '', ['scene_power_grid.svg', 'scene_power_grid.svg'], [0, 1], '', ['icon0', '#f00']) }}
+						</td>						
+					</tr>
+					<tr>
+						<td align=center valign=top height=100px>
+							{{ basic.symbol('', 'E3DC.Status.Ladezustand', '', icon.battery2('', '', 'E3DC.Status.Ladezustand', 0, 100), [20, 40, 70], '>', ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+                        <br />
+                            {{ basic.print('', 'E3DC.Status.Ladezustand', '%', '', [20, 40, 70], ['#f00', '#f79a1f', '#ff0', '#0f0']) }}
+						</td>
+						<td align=center valign=top>
+                            {{ basic.symbol('', 'E3DC.Leistung.Batterie', '', ['control_arrow_rightward.svg', 'control_minus.svg', 'control_arrow_leftward.svg'], [-10, 10], '>') }}
+                        <br />
+                            {{ basic.print('', 'E3DC.Leistung.Batterie', 'w', '', [-2000, -1000, -1, 1], ['#f00', '#f79a1f', '#ff0', '', '#0f0']) }}
+						</td>
+						<td align=center valign=top>
+                            {{ basic.symbol('', 'E3DC.Leistung.Haus', '', ['control_minus.svg', 'control_arrow_rightward.svg'], 10, '>') }}
+						<br />	
+							{{ basic.print('', 'E3DC.Leistung.Haus', 'w') }}
+						</td>
+						<td align=center valign=top>
+							{{ basic.icon('control_building_empty.svg') }}
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align=center width=140px>
+							Autarkie:
+                        <br />
+                            {{ basic.print('', 'E3DC.Status.Autarkie', '%', '', [10, 90], ['##f79a1f', '#ff0', '#0f0']) }}
+						</td>
+						<td colspan="2" align=center width=140px>
+							Eigenverbrauch:
+                        <br />
+                            {{ basic.print('', 'E3DC.Status.Eigenverbrauch', '%', '', [10, 90], ['##f79a1f', '#ff0', '#0f0']) }}
+						</td>
+					</tr>	
+					<tr>
+						<td colspan="2">
+							Status:
+                            {{ basic.symbol('', 'E3DC.Status.Fehler', '', ['control_ok.svg', 'message_attention.svg'], [0, 1], '', ['#0f0', '#f00']) }}
+						</td>
+						<td>
+                            {{ basic.print('', 'E3DC.Status.Fehlertext', '', '', '', '#ff0') }}
+						</td>
+                        <td>
+							70%:
+                        <br />    
+                            {{ basic.symbol('', 'E3DC.Status.Abregelung', ['inaktiv', 'aktiv'], '', [0, 1], '', ['#0f0', '#ff0']) }}
+						</td>
+                        <td>
+							{{ basic.symbol('', 'E3DC.Status.Notstrom', '', ['it_ups.svg', 'it_ups.svg'], [0, 1], '', ['#0f0', '#f00']) }}
+						</td>
+					</tr>					                    
+				</table>				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

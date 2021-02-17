@@ -1,0 +1,90 @@
+# E3DC.yaml
+# item configuration for smarthomeNG
+%YAML 1.1
+---
+E3DC:
+    Zeitgeber:
+        type: num
+        crontab:
+            - init = 1
+            - '*/5 * * * = 1'
+        enforce_updates: true
+    Leistung:
+        PV:
+            type: num
+            knx_dpt: 14
+            knx_cache: 7/0/0
+            Plot:
+                type: num
+                database: yes
+                eval: sh.E3DC.Leistung.PV()
+                eval_trigger: E3DC.Zeitgeber
+        Netz:
+            type: num
+            knx_dpt: 14
+            knx_cache: 7/0/1
+            Icon:
+                type: num
+                eval: ((sh.E3DC.Leistung.Netz() * -1) + 8000) / 160
+                eval_trigger: E3DC.Leistung.Netz            
+            Plot:
+                type: num
+                database: yes
+                eval: sh.E3DC.Leistung.Netz()
+                eval_trigger: E3DC.Zeitgeber
+        Batterie:
+            type: num
+            knx_dpt: 14
+            knx_cache: 7/0/2
+            Icon:
+                type: num
+                eval: (sh.E3DC.Leistung.Batterie() + 3000) / 60
+                eval_trigger: E3DC.Leistung.Batterie
+            Plot:
+                type: num
+                database: yes
+                eval: sh.E3DC.Leistung.Batterie()
+                eval_trigger: E3DC.Zeitgeber
+        Haus:
+            type: num
+            knx_dpt: 14
+            knx_cache: 7/0/3
+            Plot:
+                type: num
+                database: yes
+                eval: sh.E3DC.Leistung.Haus()
+                eval_trigger: E3DC.Zeitgeber
+    Status:
+        Eigenverbrauch:
+            type: num
+            knx_dpt: 5001
+            knx_cache: 7/0/4
+        Autarkie:
+            type: num
+            knx_dpt: 5001
+            knx_cache: 7/0/5
+        Ladezustand:
+            type: num
+            knx_dpt: 5001
+            knx_cache: 7/0/6
+            Plot:
+                type: num
+                database: yes
+                eval: sh.E3DC.Status.Ladezustand()
+                eval_trigger: E3DC.Zeitgeber
+        Notstrom:
+            type: bool
+            knx_dpt: 1
+            knx_cache: 7/0/7
+        Abregelung:
+            type: bool
+            knx_dpt: 1
+            knx_cache: 7/0/8
+        Fehler:
+            type: bool
+            knx_dpt: 1
+            knx_cache: 7/0/9
+        Fehlertext:
+            type: str
+            knx_dpt: 16001
+            knx_cache: 7/0/10
