@@ -6,4 +6,5 @@ The package contains a smarthomeNG item configuration (E3DC.yaml), the visu page
 Include the visu page into the folder with your own visu pages and drop the icon into ./dropins/icons.
 
 The result will look like this:
+
 ![](https://github.com/smartVISU-newstuff/devices/blob/main/solar_power_E3DC/E3DC%20visu%20screenshot.png)
