@@ -16,7 +16,7 @@ Die entsprechenden Parameter sind in der kwl.html zu finden. Die Dateien müssen
         <div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
             <div data-role="collapsible" data-collapsed="false">
                 <h3>Lüftungsanlage</h3>
-		{{ kwl.kwl('', 'Zentral.pluggit.OutdoorTemperature', 'Zentral.pluggit.SupplyTemperature', 'Zentral.pluggit.ExtractTemperature', 'Zentral.pluggit.ExhaustTemperature', 'Zentral.pluggit.FanSpeedLevel', 0, 4, 'Zentral.pluggit.FilterRemainingLifetime', 'Zentral.pluggit.FilterDefaultTime', 'Zentral.pluggit.CurrentUnitMode.SummerMode', 'Zentral.pluggit.Bypass.Open', 'Zentral.pluggit.VOC_Sensor.SensorValue') }}
+               {{ kwl.kwl('', 'Zentral.pluggit.OutdoorTemperature', 'Zentral.pluggit.SupplyTemperature', 'Zentral.pluggit.ExtractTemperature', 'Zentral.pluggit.ExhaustTemperature', 'Zentral.pluggit.FanSpeedLevel', 0, 4, 'Zentral.pluggit.FilterRemainingLifetime', 'Zentral.pluggit.FilterDefaultTime', 'Zentral.pluggit.CurrentUnitMode.SummerMode', 'Zentral.pluggit.Bypass.Open', 'Zentral.pluggit.VOC_Sensor.SensorValue') }}
            </div>
         </div>
     </div>
