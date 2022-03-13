@@ -1,4 +1,7 @@
-Die erste Test-Version eines KWL-Widgets. Aktuell ist es möglich die wichtigsten Dinge anzuzeigen:
+
+Die Idee war ein multifunktionelles Widget zu schaffen, welches mit den meisten Lüftungsgeräten funktioniert, aber auch von der Größe nicht größer als herkömmliche Widgets ist. Erstellt und getestet wurde es mit einer Pluggit AP310 und dem SmartHomeNG plugin der pluggit, welches ihr auch auf meinem Account unter https://github.com/CannonRS/smarthomeng_pluggit findet.
+
+Aktuell ist es möglich die wichtigsten Dinge anzuzeigen:
 
 - Lüftergeschwindigkeit
 - Filter
@@ -7,11 +10,9 @@ Die erste Test-Version eines KWL-Widgets. Aktuell ist es möglich die wichtigste
 - Bypass
 - Sommermodus
 
-Die Idee war ein multifunktionelles Widget zu schaffen, welches mit den meisten Lüftungsgeräten funktioniert. Erstellt und getestet wurde es mit einer Pluggit AP310 und dem SmartHomeNG plugin der pluggit, welches ihr auch auf meinem Account findet.
+Die entsprechenden Parameter sind in der kwl.html zu finden. Der Ordner widget_kwl muss komplett ins smartVISU-Verzeichnis "dropins" kpiert werden. Eine Einbindung könnte dann so aussehen:
 
-Die entsprechenden Parameter sind in der kwl.html zu finden. Die Dateien müssen einfach ins smartVISU-Verzeichnis. Eine Einbindung kann dann so aussehen:
-
-    {% import "kwl.html" as kwl %}
+    {% import "widget_kwl/kwl.html" as kwl %}
     <div class="block">
         <div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
             <div data-role="collapsible" data-collapsed="false">
@@ -20,3 +21,14 @@ Die entsprechenden Parameter sind in der kwl.html zu finden. Die Dateien müssen
            </div>
         </div>
     </div>
+
+Die nächsten Schritte wären noch weitere Möglichkeiten einzubauen. So fehlen aktuell noch:
+
+- Vorheizregister
+- CO2 Außenluftsensor
+- Innenraumsensor
+- Frostschutzmodus
+
+Da ich diese Sensoren aber selbst nicht ahbe und den Frostschutzmodus noch nie gesehen habe, kann ich das aktuell nicht einbauen und testen. Wenn Bedarf besteht, bitte gern melden.
+
+In späteren Versionen ist auch geplant die Anlage damit zu konfigurieren.
