@@ -11,7 +11,7 @@ Aktuell ist es möglich die wichtigsten Dinge anzuzeigen:
 - Bypass
 - Sommermodus
 
-Die entsprechenden Parameter sind in der kwl.html zu finden. Der Ordner widget_kwl muss komplett ins smartVISU-Verzeichnis "dropins" kpiert werden. Eine Einbindung könnte dann so aussehen:
+Die entsprechenden Parameter sind in der kwl.html zu finden. Der Ordner widget_kwl muss komplett ins smartVISU-Verzeichnis "dropins" kopiert werden. Eine Einbindung könnte dann so aussehen:
 
     {% import "widget_kwl/kwl.html" as kwl %}
     <div class="block">
