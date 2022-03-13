@@ -1,3 +1,4 @@
+<img alt="kwl" src="https://user-images.githubusercontent.com/47775739/158055191-ee90635b-360a-4afb-a6d3-38637e70a566.png">
 
 Die Idee war ein multifunktionelles Widget zu schaffen, welches mit den meisten Lüftungsgeräten funktioniert, aber auch von der Größe nicht größer als herkömmliche Widgets ist. Erstellt und getestet wurde es mit einer Pluggit AP310 und dem SmartHomeNG plugin der pluggit, welches ihr auch auf meinem Account unter https://github.com/CannonRS/smarthomeng_pluggit findet.
 
