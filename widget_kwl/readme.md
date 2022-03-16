@@ -34,7 +34,7 @@ Da ich diese Sensoren aber selbst nicht ahbe und den Frostschutzmodus noch nie g
 
 In späteren Versionen ist auch geplant die Anlage damit zu konfigurieren.
 
-Änderungen:
+<b>Änderungen:</b>
 
 16.03.2022:
 - Änderungen der Pfade der Bilder und des Widgets
