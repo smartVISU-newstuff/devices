@@ -11,9 +11,9 @@ Aktuell ist es möglich die wichtigsten Dinge anzuzeigen:
 - Bypass
 - Sommermodus
 
-Die entsprechenden Parameter sind in der kwl.html zu finden. Der Ordner widget_kwl muss komplett ins smartVISU-Verzeichnis "dropins" kopiert werden. Eine Einbindung könnte dann so aussehen:
+Die entsprechenden Parameter sind in der kwl.html zu finden. Alle Dateien im Ordner "widget_kwl" müssen komplett ins smartVISU-Verzeichnis "dropins" kopiert werden. Eine Einbindung könnte dann so aussehen:
 
-    {% import "widget_kwl/kwl.html" as kwl %}
+    {% import "kwl.html" as kwl %}
     <div class="block">
         <div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
             <div data-role="collapsible" data-collapsed="false">
@@ -33,3 +33,8 @@ Die nächsten Schritte wären noch weitere Möglichkeiten einzubauen. So fehlen 
 Da ich diese Sensoren aber selbst nicht ahbe und den Frostschutzmodus noch nie gesehen habe, kann ich das aktuell nicht einbauen und testen. Wenn Bedarf besteht, bitte gern melden.
 
 In späteren Versionen ist auch geplant die Anlage damit zu konfigurieren.
+
+Änderungen:
+
+16.03.2022:
+- Änderungen der Pfade der Bilder und des Widgets
