@@ -37,8 +37,8 @@
 	{% import "basic.html" as basic %}
 	{% import "icon.html" as icon %}
 
-	{% set kwl_base_dir = 'dropins/widget_kwl' %}
-	{% set kwl_pic_dir  = 'dropins/widget_kwl/icons' %}
+	{% set kwl_base_dir = 'dropins' %}
+	{% set kwl_pic_dir  = 'dropins/icons/kwl' %}
 
 	<link type="text/css" rel="stylesheet" href="{{ kwl_base_dir }}/kwl.css"/>
 	<div{% if not id is empty %}id="{{ uid(page, id) }}" class="block"{% endif %}>
