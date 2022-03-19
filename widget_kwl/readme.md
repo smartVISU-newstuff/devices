@@ -41,4 +41,4 @@ In späteren Versionen ist auch geplant die Anlage damit zu konfigurieren.
 
 19.03.2022:
 - Hilfe zugefügt
-- Formatierung der temperaturen geändert (1. Nachkommestelle wird angezeigt)
+- Formatierung der Temperaturen geändert (1. Nachkommestelle wird angezeigt)
