@@ -8,13 +8,13 @@
 
 .kwl_supply_temp_normal {
 	position: absolute;
-	margin-left: -44px;
-	margin-top: -54px; 
+	margin-left: -54px;
+	margin-top: -54px;
 }
 
 .kwl_extract_temp_normal {
 	position: absolute;
-	margin-left: -44px;
+	margin-left: -54px;
 	margin-top: -93px;
 }
 

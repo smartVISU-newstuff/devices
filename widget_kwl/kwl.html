@@ -29,7 +29,7 @@
  * @param {item(num)=} rh sensor value (optional)
  * @param {value[?]=} rh dry level (optional, under this level: super dry level, default: 30)
  * @param {value[?]=} rh good level (optional, default: 40)
- * @param {value[?]=} rh humid level (optional, defaul: 60)
+ * @param {value[?]=} rh humid level (optional, default: 60)
  */
 
 {% macro kwl(id, outdoor_temp, supply_temp, extract_temp, exhaust_temp, fanspeedlevel, fanspeedlevel_min, fanspeedlevel_max, filter_remaining_lifetime, filter_lifetime, unitmode_summer, bypass_open, voc_value, voc_goodlevel, voc_badlevel, voc_worstlevel, rh_value, rh_drylevel, rh_goodlevel, rh_humidlevel) %}
@@ -50,10 +50,10 @@
 			<tr>
 				<td>
 					/** temperatures for normal mode */
-					<div id="{{ id }}kwl_outdoor_temp_normal" class="kwl_outdoor_temp_normal">{{ basic.print(id~'kwl_outdoor_temp_normalp', outdoor_temp, '%d °C', 'Math.round(VAR)') }}</div>
-					<div id="{{ id }}kwl_supply_temp_normal" class="kwl_supply_temp_normal">{{ basic.print(id~'kwl_supply_temp_normalp',  supply_temp,  '%d °C', 'Math.round(VAR)') }}</div>
-					<div id="{{ id }}kwl_extract_temp_normal" class="kwl_extract_temp_normal">{{ basic.print(id~'kwl_extract_temp_normalp', extract_temp, '%d °C', 'Math.round(VAR)') }}</div>
-					<div id="{{ id }}kwl_exhaust_temp_normal" class="kwl_exhaust_temp_normal">{{ basic.print(id~'kwl_exhaust_temp_normalp', exhaust_temp,'%d °C', 'Math.round(VAR)') }}</div>
+					<div id="{{ id }}kwl_outdoor_temp_normal" class="kwl_outdoor_temp_normal">{{ basic.print(id~'kwl_outdoor_temp_normalp', outdoor_temp, '%.1f °C') }}</div>
+					<div id="{{ id }}kwl_supply_temp_normal" class="kwl_supply_temp_normal">{{ basic.print(id~'kwl_supply_temp_normalp',  supply_temp,  '%.1f °C') }}</div>
+					<div id="{{ id }}kwl_extract_temp_normal" class="kwl_extract_temp_normal">{{ basic.print(id~'kwl_extract_temp_normalp', extract_temp, '%.1f °C') }}</div>
+					<div id="{{ id }}kwl_exhaust_temp_normal" class="kwl_exhaust_temp_normal">{{ basic.print(id~'kwl_exhaust_temp_normalp', exhaust_temp,'%.1f °C') }}</div>
 					
 					/** temperatures for bypass mode */
 					<div id="{{ id }}kwl_outdoor_temp_bypass" class="kwl_outdoor_temp_bypass">{{ basic.print(id~'kwl_outdoor_temp_bypassp', outdoor_temp, '%d °C', 'Math.round(VAR)') }}</div>
