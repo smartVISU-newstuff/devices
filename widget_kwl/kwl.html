@@ -19,7 +19,7 @@
  * @param {value[?]=} fan speed level minimum (optional, default: 0)
  * @param {value[?]=} fan speed level maximum (optional, default: 4)
  * @param {item(num)=} item for filter remaining lifetime in days (optional)
- * @param {item(num)=} item for filter lifetime in days (optional, default: 365)
+ * @param {item(num)=} item for filter lifetime in days (optional, default: 360)
  * @param {item(bool)=} an item for unit mode: summer (optional, default: false)
  * @param {item(bool)=} an item for bypass open (optional, default: false)
  * @param {item(num)=} an item for the voc sensor value (optional)
@@ -81,7 +81,7 @@
 					{% endif %}
 
 					{% if not filter_remaining_lifetime is empty %}
-						<div class="kwl_filter_icon">{{ basic.symbol(id~'filter_icon', [filter_lifetime|default(365), filter_remaining_lifetime], '', [kwl_pic_dir~'/filter1.svg', kwl_pic_dir~'/filter2.svg', kwl_pic_dir~'/filter3.svg', kwl_pic_dir~'/filter4.svg'], [33, 66, 99], '>(VAR2/VAR1*100)', '', '', '', 'midi') }}</div>
+						<div class="kwl_filter_icon">{{ basic.symbol(id~'filter_icon', [filter_lifetime|default(360), filter_remaining_lifetime], '', [kwl_pic_dir~'/filter1.svg', kwl_pic_dir~'/filter2.svg', kwl_pic_dir~'/filter3.svg', kwl_pic_dir~'/filter4.svg'], [33, 66, 99], '>(100-(VAR2*100/VAR1))', '', '', '', 'midi') }}</div>
 						<div class="kwl_filter_text">{{ basic.print(id~'filter_text', filter_remaining_lifetime, '%d') }}</div>
 					{% endif %}
 
