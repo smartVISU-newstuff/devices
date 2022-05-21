@@ -42,3 +42,7 @@ In späteren Versionen ist auch geplant die Anlage damit zu konfigurieren.
 19.03.2022:
 - Hilfe zugefügt
 - Formatierung der Temperaturen geändert (1. Nachkommestelle wird angezeigt)
+
+21.05.22
+- Icons für VOC-Sensor korrigiert
+- Filternutzung funktionierte nicht
