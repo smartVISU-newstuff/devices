@@ -34,8 +34,8 @@
 
 {% macro kwl(id, outdoor_temp, supply_temp, extract_temp, exhaust_temp, fanspeedlevel, fanspeedlevel_min, fanspeedlevel_max, filter_remaining_lifetime, filter_lifetime, unitmode_summer, bypass_open, voc_value, voc_goodlevel, voc_badlevel, voc_worstlevel, rh_value, rh_drylevel, rh_goodlevel, rh_humidlevel) %}
 
-	{% import "basic.html" as basic %}
-	{% import "icon.html" as icon %}
+	{% import config_version_full >= "3.2.c" ? "@widgets/basic.html" : "basic.html" as basic %}
+	{% import config_version_full >= "3.2.c" ? "@widgets/icon.html" : "icon.html" as icon %}
 
 	{% set kwl_base_dir = 'dropins' %}
 	{% set kwl_pic_dir  = 'dropins/icons/kwl' %}
