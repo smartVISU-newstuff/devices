@@ -10,12 +10,11 @@
  *              - Updated helios_logics.py in smarthome/logics (contains related logics)
  *              Ready-to-use smartVISU with UZSU widget
  *
- * Install:     Copy helios.html/.css/.js this file to helios_base_dir (default: smartVISU/widgets/)
- *              Copy images to helios_pic_dir (default: smartVISU/pics/helios/)
+ * Install:     Copy helios.html/.css/.js to smartVISU/dropins/widgets/ or smartVISU/pages/<YourPages>/widgets)
+ *              Copy images to helios_pic_dir (default: smartVISU/dropins/pics/helios/)
  *
- * Usage:       Add the following lines your smartVISU's html:
+ * Usage:       Add the following line your smartVISU's html:
  *
- *              {% import "helios.html" as helios %}
  *              {{ helios.show_widget(id, use_uzsu, title) }}
  *
  *              Parameters:
@@ -24,7 +23,6 @@
  *              title    - Optional title above the image
  *
  *              Example:
- *              {% import "helios.html" as helios %}
  *              {{ helios.show_widget('EC300Pro', true, 'Kontrollierte Wohnraumlüftung') }}
  *
  * -------------------------------------------------------------------------------------------------
@@ -34,15 +32,14 @@
 
 
     /** Preparations **/
-    {% import "basic.html" as basic %}                                          /** some widgets **/
-    {% import "device.html" as device %}                                    /** new 2.9 for UZSU **/
-    /** {% if use_uzsu %} {% import "widget_uzsu.html" as uzsu %} {% endif %}      obsolete 2.9  **/
+    {% import config_version_full >= "3.2.c" ? "@widgets/basic.html" : "basic.html" as basic %}                /** some widgets **/
+    {% import config_version_full >= "3.2.c" ? "@widgets/device.html" : "device.html" as device %}  /** new as of v2.9 for UZSU **/
+
     {% set uid = uid(page, id) %}
     
     {% set debug_mode = false %}                               /** additional output (debugging) **/
     {% set documentation_mode = false %}                                /** for screenshots only **/    
-    {% set helios_base_dir = 'widgets' %}                          /** directory of self and css **/
-    {% set helios_pic_dir  = 'pics/helios' %}                          /** directory of own pics **/
+    {% set helios_pic_dir  = 'dropins/pics/helios' %}                  /** directory of own pics **/
     {% set boost_mode = '1' %}                  /** 1=Helios, 2=Logic fixed, 3=Logic interactive **/
     
     /** Your own strings, translations and outputs, as you deem necessary: **/
@@ -90,22 +87,6 @@
     {% endautoescape %}
     **/
     
-    {% set target_sv_version = '2.09' %}
-    {% set current_sv_version = config_version %}
-    /** Testausgabe config-version:|{{config_version}}| **/
-    {% if current_sv_version|length == 3 %}
-        {% set current_sv_version = current_sv_version|replace({'.':'.0'}) %}
-    {% endif %}
-    {% if current_sv_version < target_sv_version %}
-        <script type="text/javascript">console.error("The Helios/Vallox module requires at least smartVISU {{ target_sv_version }}!")</script>
-    {% else %}
-        /** macro / widget / code **/
-    {% endif %} 
-
-
-    /** The style sheet **/
-    <link type="text/css" rel="stylesheet" href="{{helios_base_dir}}/helios.css"/>
-
     
     /** Let's go **/
     <div id='{{uid}}-main' class='block' style='text-align:left;'>
@@ -131,7 +112,6 @@
             <a href="#popup_helios_level" data-rel="popup">
                 {% for level in 1..8 %}
                     {% set itemid = id~'_display_level_'~level %}
-                    /** {% set symbol = icon0~'edit_numeric_'~level~'.svg' %} **/
                     {% set symbol = 'edit_numeric_'~level~'.svg' %}
                     {{ basic.symbol(itemid, 'ventilation.rs485._fanspeed', '', symbol, level) }}
                 {% endfor %}
@@ -145,7 +125,6 @@
                     {% for level in 1..8 %}
                         {% set itemid = id~'_set_level_'~level %}
                         {% set levelsymbol = 'edit_numeric_'~level~'.svg' %}
-                        /** sV 2.8: {{ basic.button(itemid, 'ventilation.rs485._fanspeed', level, '', level, 'midi') }} &nbsp; &nbsp; **/
                         {{ basic.stateswitch(itemid, 'ventilation.rs485._fanspeed', '', [level,level], [levelsymbol,levelsymbol], '', ['orange','#fff']) }} &nbsp; &nbsp;
                         {% if level == 4 %} </div><br/><div>{% endif %}
                     {% endfor %}
@@ -206,8 +185,7 @@
         
         /** Error indicator (whenever an error is up) **/
         <div class="helios_error_icon" >
-            /** {{ _self.symbol_notzero(id~'_error', 'ventilation.rs485._device_error', icon0~'message_service.svg', 'ERROR!', '#popup_helios_error') }} **/
-			{{ basic.symbol(id~'_error', 'ventilation.rs485._device_error', 'ERROR!', icon0~'message_service.svg', 0, '!VAR1', 'red', '#popup_helios_error', '#popup_helios_error') }}
+			{{ basic.symbol(id~'_error', 'ventilation.rs485._device_error', 'ERROR!', 'message_service.svg', 0, '!VAR1', 'red', '#popup_helios_error', 'popup') }}
 			
             /** Here's the corresponding popup with the detailed error description **/
             <div id="popup_helios_error" class="helios_popup_error" data-role="popup" data-overlay-theme="c">
@@ -247,8 +225,6 @@
         <div class="helios_filterchange_icon">
             <a href="#popup_helios_filterchange" data-rel="popup">{{ basic.symbol(id~'_clean_filter', 'ventilation.rs485._clean_filter', '', 'vent_air_filter.svg', 0, '', 'orangered') }}</a>
             <div class="helios_mini-info_rt">{{ basic.symbol(id~'_clean_filter_text', 'ventilation.rs485._clean_filter', 'FILTER', '', '0') }}</div>
-            /** {{ basic.text(id, gad, txt_on, txt_off, val_on, val_off) }} gegen {{ basic.symbol(id, items, text, icon, value, formula, color) }} ersetzt
-                Achtung - müsste bei allen Indicators gehen bis auf 'Fehler' (da nur mit Hilfsitem) **/
         </div>
         /** -----------> Todo: Rücksetzen des Wertes auf xx Monate) ----------------- **/
         /** Here's the corresponding popup with the detailed error description **/
@@ -267,8 +243,6 @@
         /** UZSU button and widget call up **/
         {% if use_uzsu %}
             <div class="helios_UZSU_button">
-                /** until 2.8: {{ uzsu.uzsu_icon(id~'_fanspeed_timer', 'ventilation.uzsu.uzsu_timer', ' ','0', 'time_timer.svg', 'time_timer.svg', 'num', 'An', 'Aus') }} **/
-                /** 2.9+: **/
                 {{ device.uzsuicon(id~'_fanspeed_timer', 'ventilation.uzsu.uzsu_timer', ' ', 'time_timer.svg', 'time_timer.svg','num' ) }}
             </div>
         {% endif %}
@@ -284,13 +258,9 @@
 
             /** Bypass on/off **/
             <div /**class="helios_bypass_indicator"**/>
-                /** noch umstellen:
                 
-                {{ basic.switch(id~'_bypass_state', 'ventilation.rs485._bypass_disabled', 'audio_fade.svg', 'audio_fade.svg') }}
+                {{ basic.stateswitch(id~'_bypass_state', 'ventilation.rs485._bypass_disabled', '','', 'audio_fade.svg', '', ['icon1', 'icon0']) }}
                 
-                {{ basic.switch     (id, item, pic_on, pic_off, val_on, val_off, color_on, color_off) }}
-                {{ basic.stateswitch(id, item, type, value, icon, text, color, indicator) }}
-                **/
             </div>
             2 Tabs, 1x m³, m² usw<br/>
             <br/>
@@ -303,13 +273,7 @@
             <div>
                 Status: {{ basic.flip('flip1', 'ventilation.rs485._powerstate') }} 
                 
-                /** ggf. noch umstellen: 
-                {{ basic.dual('flip2', 'ventilation.rs485._powerstate') }}
-                
-                {{ basic.dual(id, item, pic_on, pic_off, val_on, val_off, type, color_on, color_off) }}
-                {{ basic.stateswitch(id, item, type, value, icon, text, color, indicator) }}
-                **/
-                Value: {{ basic.print(id~'_power_xstate', 'ventilation.rs485._powerstate') }}
+                 Value: {{ basic.print(id~'_power_xstate', 'ventilation.rs485._powerstate') }}
                 <br/>
                 Achtung: Die Fernbedienung kann vom Widget nicht wieder <br/>eingeschaltet werden und setzt bei Betätigung die Anlage auf die<br/> eingestellte Mindeststufe zurück.
             </div>
